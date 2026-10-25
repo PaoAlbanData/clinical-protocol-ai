@@ -1,0 +1,2 @@
+# Sólo para la preparación local del índice (no se ejecuta en Vercel).
+pymupdf==2.0
