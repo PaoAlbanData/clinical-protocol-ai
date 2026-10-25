@@ -5,7 +5,7 @@
 > ⚠️ **Demostración técnica de portfolio.** No es un sistema autorizado de diagnóstico, prescripción ni apoyo a decisiones clínicas.
 > Utiliza cuatro Procesos Asistenciales Integrados de la Junta de Andalucía (2015–2020) como **material de simulación**; pueden no reflejar la práctica actual.
 
-- **Demo:** _pendiente de publicación en Vercel_
+- **Demo:** <https://clinical-protocol-ai-kappa.vercel.app>
 - **Coste de funcionamiento:** 0 € (ver [COSTS.md](COSTS.md))
 - **Stack:** React · Vite · TypeScript · Tailwind CSS · MiniSearch (BM25) · PyMuPDF · WebLLM (opcional) · Web Speech API
 
@@ -135,7 +135,14 @@ Detalle por pregunta: [tests/eval-report.md](tests/eval-report.md).
 
 Conclusión: la IA local funciona y no tiene coste, pero un modelo de 1,5B es poco fiable para este uso. Se mantiene como opción experimental y desactivada por defecto; la respuesta extractiva es la principal.
 
-**Pendiente de verificar:** dictado por voz con micrófono real; prueba en Vercel desde ventana de incógnito y en un móvil físico.
+**Producción (Vercel Hobby, 25/10/2026), sesión limpia sin caché, cookies ni almacenamiento:**
+- Cabeceras activas: `Content-Security-Policy`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`; caché de 1 h para el índice y 24 h para los PDF.
+- Índice servido comprimido (≈167 KB). Los 4 PDF descargados desde Vercel tienen el mismo SHA-256 que los originales.
+- Preguntas de ictus, trauma, EPOC y diabetes con las mismas páginas que en local; la pregunta sobre amoxicilina se rechaza con el mensaje exacto.
+- **0 peticiones a dominios externos**, 0 cookies y 0 datos en `localStorage`.
+- Vista móvil (375 px) sin desplazamiento horizontal.
+
+**Pendiente de verificar:** dictado por voz y prueba en un móvil físico (lo comprueba la autora manualmente).
 
 ## Limitaciones conocidas
 

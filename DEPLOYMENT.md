@@ -1,5 +1,7 @@
 # Publicación
 
+**URL pública:** <https://clinical-protocol-ai-kappa.vercel.app> (proyecto `clinical-protocol-ai` en Vercel Hobby, publicación automática desde la rama `main`). El dominio `clinical-protocol-ai.vercel.app` pertenece a otra cuenta.
+
 La aplicación es un sitio estático: Vercel ejecuta `npm run build` y publica `dist/`. No hace falta Python en Vercel porque el índice (`public/data/index.json`) y los PDF (`data/protocols/`) están en el repositorio.
 
 ## 0. Comprobaciones previas (local)
