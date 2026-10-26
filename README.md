@@ -138,7 +138,7 @@ Detalle por pregunta: [tests/eval-report.md](tests/eval-report.md).
 - 9 correctas a la primera (síndrome antifosfolipídico, insuficiencia renal, embarazo, embolectomía quirúrgica, ECMO, síndrome postrombótico, estratificación del riesgo, trombofilia, trombosis asociada a catéter).
 - 3 falsos rechazos por **diferencias de vocabulario entre España y Argentina** («cribado» frente a «rastreo», «obesos» frente a «obesidad», «durar» frente a «duración»). Se añadieron equivalencias y las tres pasaron a responder; dos se incorporaron a las pruebas. La de duración del tratamiento responde con una fuente poco precisa (duración en pacientes con cáncer en lugar del capítulo general).
 
-**Navegador y producción:** ver [DEPLOYMENT.md](DEPLOYMENT.md) para la verificación de la URL pública.
+**Navegador y producción (26/10/2026):** build de producción con la CSP de `vercel.json`, en escritorio (1280 px) y móvil (375 px, sin desplazamiento horizontal) y en la URL pública de Vercel. Preguntas de diagnóstico, tratamiento y poblaciones especiales con las mismas páginas que en local, etiquetas de clase y nivel de evidencia visibles, rechazo con el mensaje exacto, PDF servido con el mismo tamaño que el original, **0 peticiones a dominios externos** y 0 cookies. La URL del índice incluye su huella (`index.json?v=…`) para que ningún navegador con caché combine la interfaz nueva con un índice antiguo.
 
 **Pendiente de verificar:** dictado por voz con micrófono real y prueba en un móvil físico (los comprueba la autora manualmente).
 
