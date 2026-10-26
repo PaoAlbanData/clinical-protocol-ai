@@ -1,34 +1,35 @@
 # Informe de evaluación (generado por `npm test`)
 
-Fecha: 2026-10-25 · Aciertos: 28/28
+Fecha: 2026-10-26 · Aciertos: 29/29
 
 | Pregunta | Esperado | Fuentes recuperadas | Resultado |
 |---|---|---|---|
-| ¿Cuál es el plazo máximo desde el inicio de los síntomas para la fibrinólisis intravenosa en el ictus? | ictus p11/28/30 | ictus p11, ictus p30, ictus p32 | ✅ |
-| ¿En cuánto tiempo debe estar realizado el TC de cráneo desde la llegada al hospital? | ictus p11/30/47 | ictus p11, ictus p30, ictus p47 | ✅ |
-| tiempo puerta-aguja en el ictus | ictus p11/29/32 | ictus p11, ictus p29, ictus p32 | ✅ |
-| ¿Qué puntuación de la escala NIHSS contraindica la fibrinolisis? | ictus p30 | ictus p30, ictus p12 | ✅ |
-| ¿Cuál es la dosis de ácido tranexámico en el trauma grave? | trauma p40/65 | trauma p65, trauma p68, trauma p40 | ✅ |
-| ¿Cuándo se debe colocar un cinturón pélvico? | trauma p13/40/62 | trauma p95, trauma p96, trauma p40 | ✅ |
-| ¿Se puede usar Ringer lactato en pacientes con TCE grave? | trauma p40/70 | trauma p40, trauma p70, trauma p65 | ✅ |
-| indicaciones de intubación orotraqueal en el trauma | trauma p123 | trauma p36, trauma p123, trauma p126 | ✅ |
-| ¿Cómo se confirma el diagnóstico de EPOC? | epoc p11/19/25 | epoc p25, epoc p28, epoc p26 | ✅ |
-| criterios de indicación de oxigenoterapia crónica domiciliaria | epoc p42 | epoc p42, epoc p60, epoc p70 | ✅ |
-| ¿Se recomienda la vacuna de la gripe en la EPOC? | epoc p34/38 | epoc p34, epoc p38 | ✅ |
-| ¿A quién se debe ofrecer rehabilitación respiratoria? | epoc p11/32/33 | epoc p32, epoc p11, epoc p60 | ✅ |
-| ¿Cuál es el objetivo de HbA1c en adultos con diabetes? | diabetes p40/66 | diabetes p40, diabetes p47, diabetes p16 | ✅ |
-| ¿Cómo se realiza el cribado de retinopatía diabética? | diabetes p38 | diabetes p53, diabetes p38, diabetes p57 | ✅ |
-| ¿Qué hacer ante una hipoglucemia en un paciente inconsciente? | diabetes p55 | diabetes p55 | ✅ |
-| ¿Cuál es el primer fármaco recomendado en la diabetes tipo 2? | diabetes p13/46 | diabetes p13, diabetes p31, diabetes p21 | ✅ |
-| cribado del pie diabético | diabetes p36/52 | diabetes p36, diabetes p75, diabetes p37 | ✅ |
-| ¿Qué escala se usa para valorar la disnea en la EPOC? | epoc p26 | epoc p26, epoc p27, epoc p25 | ✅ |
-| control de la tensión arterial en diabetes | diabetes p50 | diabetes p50, diabetes p57, diabetes p49 | ✅ |
-| criterios de activación del código trauma | trauma p48 | trauma p48, trauma p49, trauma p120 | ✅ |
+| ¿Cómo se evalúa la probabilidad clínica de TEP? | etv p15/16/17 | etv p15, etv p17, etv p14 | ✅ |
+| ¿Cuándo se puede usar la regla PERC? | etv p15/17 | etv p17, etv p15 | ✅ |
+| ¿Qué estudio de imagen se recomienda para confirmar un TEP? | etv p25 | etv p15, etv p25, etv p17 | ✅ |
+| ¿Cuándo se puede usar el dímero-D ajustado por edad? | etv p22/23 | etv p22, etv p23, etv p43 | ✅ |
+| dímero-D en embarazadas con sospecha de TEP | etv p19/20 | etv p19, etv p20, etv p22 | ✅ |
+| ¿Qué significa HTPTC? | etv p9 | etv p9, etv p71, etv p70 | ✅ |
+| ¿Qué pacientes con TEP pueden tratarse de forma ambulatoria? | etv p40/41 | etv p40 | ✅ |
+| fibrinolíticos sistémicos en TEP de alto riesgo | etv p52 | etv p93, etv p54, etv p52 | ✅ |
+| ¿Cuándo está indicado un filtro de vena cava inferior? | etv p60 | etv p60, etv p93, etv p42 | ✅ |
+| ¿Cómo se revierte el dabigatrán en un sangrado crítico? | etv p72 | etv p75, etv p72, etv p69 | ✅ |
+| ¿Se debe mantener la aspirina en pacientes anticoagulados por ETV? | etv p45 | etv p45, etv p81, etv p80 | ✅ |
+| dosis de heparina no fraccionada en el tratamiento inicial | etv p43/85 | etv p85, etv p92, etv p110 | ✅ |
+| trombo en tránsito | etv p37 | etv p37, etv p34, etv p32 | ✅ |
+| medias de compresión en la trombosis venosa profunda | etv p41 | etv p94, etv p41, etv p110 | ✅ |
+| anticoagulación en pacientes con cáncer activo y ETV | etv p84/85/86/87 | etv p87, etv p84, etv p108 | ✅ |
+| ¿Cuándo debemos sospechar un síndrome de May-Thurner? | etv p93 | etv p93 | ✅ |
+| tratamiento de la trombosis venosa superficial | etv p108/109/110 | etv p108, etv p109, etv p16 | ✅ |
+| nuevos anticoagulantes inhibidores del factor XI | etv p112/113 | etv p112 | ✅ |
+| grupos de respuesta rápida al embolismo de pulmón (PERT) | etv p114/115/116 | etv p116 | ✅ |
+| cribado de cáncer oculto tras una trombosis | etv p27 | etv p27 | ✅ |
+| gammagrafía de ventilación perfusión en el diagnóstico de TEP | etv p25 | etv p25, etv p26, etv p70 | ✅ |
 | ¿Cuál es la dosis de amoxicilina en la otitis media? | rechazo | rechazada | ✅ |
-| tratamiento del cáncer de mama | rechazo | rechazada | ✅ |
-| ¿Qué vacuna de la gripe se recomienda en embarazadas? | rechazo | rechazada | ✅ |
-| dosis de paracetamol en niños | rechazo | rechazada | ✅ |
 | ¿Cuál es el tratamiento de la migraña? | rechazo | rechazada | ✅ |
+| dosis de insulina en la cetoacidosis diabética | rechazo | rechazada | ✅ |
 | ¿Cuál es el horario de visitas del hospital? | rechazo | rechazada | ✅ |
+| vacuna antigripal en la EPOC | rechazo | rechazada | ✅ |
+| tratamiento del asma bronquial | rechazo | rechazada | ✅ |
 | protocolo de reanimación neonatal | rechazo | rechazada | ✅ |
-| ¿Qué antibiótico se usa en la neumonía por covid? | rechazo | rechazada | ✅ |
+| dosis de paracetamol en niños | rechazo | rechazada | ✅ |

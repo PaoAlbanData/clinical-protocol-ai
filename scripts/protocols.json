@@ -1,78 +1,23 @@
 [
   {
-    "id": "trauma",
-    "file": "pai_atg_2020.pdf",
-    "title": "Atención al trauma grave. Proceso Asistencial Integrado",
-    "shortTitle": "Trauma grave",
-    "institution": "Consejería de Salud y Familias. Junta de Andalucía",
-    "year": 2020,
-    "url": "https://portal.guiasalud.es/wp-content/uploads/2022/07/pai_atg_2020.pdf",
-    "license": "CC BY-NC-ND 4.0",
-    "contentPages": [
-      12,
-      126
+    "id": "etv",
+    "file": "sac_consenso_etv_2025.pdf",
+    "title": "Consenso para el Diagnóstico y Tratamiento de la Enfermedad Tromboembólica Venosa",
+    "shortTitle": "Consenso ETV (SAC 2025)",
+    "institution": "Sociedad Argentina de Cardiología, en colaboración con la Sociedad Argentina de Hematología",
+    "citation": "Rev Argent Cardiol 2025;93(Supl 6)",
+    "year": 2025,
+    "url": "https://www.sac.org.ar/wp-content/uploads/2025/04/COMPLETO-G.pdf",
+    "licenseUrl": "https://rac.sac.org.ar/index.php/rac/Suplementos",
+    "license": "CC BY-NC-SA 2.5 AR",
+    "contentPages": [9, 118],
+    "glossaryPages": [9, 9],
+    "headerPatterns": [
+      "^\\d{1,3}$",
+      "^REVISTA ARGENTINA DE CARDIOLOG[IÍ]A\\s*/",
+      "^Enfermedad tromboemb[oó]lica venosa$",
+      "^GU[IÍ]AS ARGENTINAS DE CONSENSO"
     ],
-    "keywords": "trauma grave traumatismo politraumatizado politrauma",
-    "glossaryPages": [
-      125,
-      126
-    ]
-  },
-  {
-    "id": "epoc",
-    "file": "pa_1_pai-epoc.pdf",
-    "title": "Enfermedad Pulmonar Obstructiva Crónica (EPOC). Proceso Asistencial Integrado",
-    "shortTitle": "EPOC",
-    "institution": "Consejería de Salud. Junta de Andalucía",
-    "year": 2015,
-    "url": "https://portal.guiasalud.es/wp-content/uploads/2019/06/pa_1_pai-epoc.pdf",
-    "license": "CC BY-NC-ND 4.0",
-    "contentPages": [
-      10,
-      74
-    ],
-    "keywords": "epoc enfermedad pulmonar obstructiva cronica",
-    "glossaryPages": [
-      73,
-      74
-    ]
-  },
-  {
-    "id": "ictus",
-    "file": "pa_2_pai-ictus.pdf",
-    "title": "Ictus. Proceso Asistencial Integrado",
-    "shortTitle": "Ictus",
-    "institution": "Consejería de Igualdad, Salud y Políticas Sociales. Junta de Andalucía",
-    "year": 2015,
-    "url": "https://portal.guiasalud.es/wp-content/uploads/2019/06/pa_2_pai-ictus.pdf",
-    "license": "CC BY-NC-ND 4.0",
-    "contentPages": [
-      10,
-      70
-    ],
-    "keywords": "ictus accidente cerebrovascular acv",
-    "glossaryPages": [
-      69,
-      70
-    ]
-  },
-  {
-    "id": "diabetes",
-    "file": "pa_5_pai-diabetes_18_06_2018.pdf",
-    "title": "Diabetes Mellitus. Proceso Asistencial Integrado",
-    "shortTitle": "Diabetes mellitus",
-    "institution": "Consejería de Salud. Junta de Andalucía",
-    "year": 2018,
-    "url": "https://portal.guiasalud.es/wp-content/uploads/2019/06/pa_5_pai-diabetes_18_06_2018.pdf",
-    "license": "CC BY-NC-ND 4.0",
-    "contentPages": [
-      12,
-      94
-    ],
-    "keywords": "diabetes mellitus dm",
-    "glossaryPages": [
-      93,
-      94
-    ]
+    "keywords": "enfermedad tromboembolica venosa etv tromboembolia pulmonar tep embolia trombosis venosa profunda tvp"
   }
 ]

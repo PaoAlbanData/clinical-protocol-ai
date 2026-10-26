@@ -10,10 +10,10 @@ import { INSUFFICIENT } from "./lib/engine";
 type Message = { id: string; role: "user"; text: string } | { id: string; role: "assistant"; data: AssistantMessage };
 
 const EXAMPLES = [
-  "¿Cuál es el plazo máximo para la fibrinolisis intravenosa en el ictus?",
-  "¿Cuándo se debe colocar un cinturón pélvico en el trauma grave?",
-  "¿Cómo se confirma el diagnóstico de EPOC?",
-  "¿Cómo se realiza el cribado de retinopatía diabética?",
+  "¿Qué pacientes con TEP pueden tratarse de forma ambulatoria?",
+  "¿Cuándo se puede usar el dímero-D ajustado por edad?",
+  "¿Cuándo está indicado un filtro de vena cava inferior?",
+  "¿Cómo se revierte el dabigatrán en un sangrado crítico?",
   "¿Cuál es la dosis de amoxicilina en la otitis media?",
 ];
 
@@ -158,7 +158,7 @@ export default function App() {
           <IconAlert className="mt-0.5 h-3.5 w-3.5 text-amber-700" />
           <span>
             <strong>Herramienta de demostración.</strong> No es un sistema autorizado de diagnóstico, prescripción ni apoyo a decisiones clínicas.
-            Usa procesos asistenciales de la Junta de Andalucía (2015–2020) como material de simulación; pueden estar desactualizados.
+            Consulta el Consenso de Enfermedad Tromboembólica Venosa de la Sociedad Argentina de Cardiología (2025); verifique siempre en el documento original.
           </span>
         </p>
       </div>
@@ -170,11 +170,12 @@ export default function App() {
           <div className="flex-1 space-y-4 pb-4">
             {messages.length === 0 && (
               <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
-                <h2 className="text-lg font-semibold text-slate-900 sm:text-xl">¿Qué quiere consultar en los protocolos?</h2>
+                <h2 className="text-lg font-semibold text-slate-900 sm:text-xl">¿Qué quiere consultar sobre la enfermedad tromboembólica venosa?</h2>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
-                  Escriba o dicte una pregunta general. El buscador localiza los fragmentos relevantes en los cuatro PDF{" "}
-                  <strong>directamente en su navegador</strong> y responde con extractos literales, documento y número de página. Si no hay
-                  evidencia suficiente, lo indica.
+                  Escriba o dicte una pregunta general sobre tromboembolia de pulmón (TEP) o trombosis venosa profunda (TVP): diagnóstico,
+                  estratificación del riesgo, anticoagulación, fibrinólisis, filtros, embarazo, cáncer… El buscador localiza los fragmentos del
+                  consenso <strong>directamente en su navegador</strong> y responde con extractos literales, la página del PDF y, cuando la hay,
+                  la clase de recomendación y el nivel de evidencia. Si no hay evidencia suficiente, lo indica.
                 </p>
                 <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-slate-500">Ejemplos</p>
                 <div className="mt-2 flex flex-wrap gap-2">
@@ -264,11 +265,12 @@ export default function App() {
 
       <footer className="border-t border-slate-200 bg-white">
         <p className="mx-auto max-w-7xl px-4 py-3 text-[11px] leading-relaxed text-slate-500">
-          Fuentes: Procesos Asistenciales Integrados de la Consejería de Salud de la Junta de Andalucía, disponibles en GuíaSalud. Licencia{" "}
-          <a className="underline" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" target="_blank" rel="noopener noreferrer">
-            CC BY-NC-ND 4.0
+          Fuente: «Consenso para el Diagnóstico y Tratamiento de la Enfermedad Tromboembólica Venosa», Sociedad Argentina de Cardiología
+          en colaboración con la Sociedad Argentina de Hematología. Rev Argent Cardiol 2025;93(Supl 6). Licencia{" "}
+          <a className="underline" href="https://creativecommons.org/licenses/by-nc-sa/2.5/ar/" target="_blank" rel="noopener noreferrer">
+            CC BY-NC-SA 2.5 AR
           </a>
-          ; los PDF se reproducen sin modificaciones. Proyecto de portfolio sin ánimo de lucro, sin analítica ni cookies.
+          ; el PDF se reproduce sin modificaciones. Proyecto de portfolio sin ánimo de lucro, sin analítica ni cookies.
         </p>
       </footer>
 

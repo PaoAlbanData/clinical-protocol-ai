@@ -27,6 +27,19 @@ function withCitations(text: string, id: string) {
   });
 }
 
+/** Muestra «[Recomendación clase I, nivel de evidencia B]» como una etiqueta. */
+function withRecommendations(text: string) {
+  return text.split(/(\[Recomendación clase [^\]]+\])/g).map((part, i) =>
+    part.startsWith("[Recomendación clase") ? (
+      <span key={i} className="ml-1 inline-block rounded bg-emerald-50 px-1.5 py-0.5 align-[1px] text-[11px] font-semibold text-emerald-800 ring-1 ring-emerald-200">
+        {part.slice(1, -1)}
+      </span>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+}
+
 function plainText(msg: AssistantMessage): string {
   const { answer } = msg;
   if (answer.kind !== "answer") return answer.text;
@@ -42,8 +55,11 @@ function SourceItem({ s, id }: { s: Source; id: string }) {
       <div className="flex gap-2.5">
         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-bold text-white">{s.n}</span>
         <div className="min-w-0 flex-1">
-          <blockquote className="whitespace-pre-line border-l-2 border-brand-200 pl-3 text-sm leading-relaxed text-slate-800">{s.excerpt}</blockquote>
-          <p className="mt-2 text-xs text-slate-500">
+          <blockquote className="whitespace-pre-line border-l-2 border-brand-200 pl-3 text-sm leading-relaxed text-slate-800">
+            {withRecommendations(s.excerpt)}
+          </blockquote>
+          {(s.chunk.s || s.chunk.c) && <p className="mt-2 text-xs text-slate-600">{s.chunk.s ?? s.chunk.c}</p>}
+          <p className="mt-1 text-xs text-slate-500">
             <span className="font-semibold text-slate-700">{s.doc.shortTitle}</span> · {s.doc.institution} · {s.doc.year} ·{" "}
             <span className="font-medium text-slate-700">
               Pág. {s.chunk.p} del PDF{printed}
@@ -54,7 +70,7 @@ function SourceItem({ s, id }: { s: Source; id: string }) {
               <IconFile className="h-3.5 w-3.5" /> Abrir PDF en la pág. {s.chunk.p}
             </a>
             <a className="btn-ghost" href={`${s.doc.url}#page=${s.chunk.p}`} target="_blank" rel="noopener noreferrer">
-              <IconExternal className="h-3.5 w-3.5" /> Original en GuíaSalud
+              <IconExternal className="h-3.5 w-3.5" /> Fuente oficial
             </a>
           </div>
         </div>
@@ -99,7 +115,7 @@ export function AnswerCard({ msg, id }: { msg: AssistantMessage; id: string }) {
         {answer.text}
         {answer.kind === "insufficient" && (
           <p className="mt-2 text-xs text-amber-800">
-            Pruebe a reformular con términos de los protocolos (p. ej. «fibrinolisis», «espirometría», «HbA1c», «código trauma»).
+            Pruebe a reformular con términos del consenso (p. ej. «TEP», «dímero-D», «anticoagulación», «filtro de vena cava», «embarazo»).
           </p>
         )}
       </div>
@@ -141,7 +157,7 @@ export function AnswerCard({ msg, id }: { msg: AssistantMessage; id: string }) {
       )}
 
       <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
-        {msg.generated !== undefined ? "Extractos de respaldo" : "Lo que dicen los protocolos"}
+        {msg.generated !== undefined ? "Extractos de respaldo" : "Lo que dice el documento"}
       </p>
       <ol className="space-y-2">
         {answer.sources.map((s) => (

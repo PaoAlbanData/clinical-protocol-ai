@@ -1,18 +1,6 @@
 {
-  "pai_atg_2020.pdf": {
-    "sha256": "4541ee2ea4694de05fc48e8d95fc6744332349aab05f7e13617d9893b88ceedb",
-    "bytes": 1313773
-  },
-  "pa_1_pai-epoc.pdf": {
-    "sha256": "a11f9ee3b0c561c8b9f4de089a661367a515f01b23fddf791690b2e08143be91",
-    "bytes": 874793
-  },
-  "pa_2_pai-ictus.pdf": {
-    "sha256": "d542151eec955e3119ac2e31b8ae25a311c0fe50b576a5a75a41c8ec8f45fa82",
-    "bytes": 663188
-  },
-  "pa_5_pai-diabetes_18_06_2018.pdf": {
-    "sha256": "3babb05111323a3f2cfb5e092d46889c51beac585266b0f0ec992e996cde104f",
-    "bytes": 1161682
+  "sac_consenso_etv_2025.pdf": {
+    "sha256": "b8fb8193e3ab3f9b64b3ec375f46359f46d849e09d7e75bba842aae122a6bd97",
+    "bytes": 5289822
   }
 }

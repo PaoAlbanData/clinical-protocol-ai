@@ -26,17 +26,55 @@ const STOPWORDS = new Set(
 
 /** Sinónimos y siglas frecuentes que se expanden en la consulta. */
 const QUERY_SYNONYMS: Record<string, string[]> = {
-  acv: ["ictus"],
-  politrauma: ["trauma"],
-  politraumatizado: ["trauma"],
-  traumatismo: ["trauma"],
-  dm: ["diabetes"],
-  azucar: ["glucemia"],
-  hba1c: ["hb1c"],
-  hb1c: ["hba1c"],
-  fibrinolisis: ["trombolisis"],
-  trombolisis: ["fibrinolisis"],
-  oxigenoterapia: ["oxigeno"],
+  // Enfermedad tromboembólica venosa (siglas del consenso y términos coloquiales)
+  tep: ["tromboembolia", "embolia", "tromboembolismo"],
+  tromboembolia: ["tep", "tromboembolismo", "embolia"],
+  tromboembolismo: ["tep", "tromboembolia", "embolia"],
+  embolia: ["tep", "tromboembolia", "tromboembolismo"],
+  embolismo: ["tep", "embolia"],
+  tvp: ["trombosis"],
+  etv: ["tromboembolica"],
+  hbpm: ["heparina", "enoxaparina"],
+  heparina: ["hbpm", "hnf"],
+  enoxaparina: ["hbpm"],
+  acod: ["anticoagulantes", "rivaroxaban", "apixaban", "edoxaban", "dabigatran"],
+  avk: ["warfarina", "acenocumarol"],
+  warfarina: ["avk"],
+  acenocumarol: ["avk"],
+  fvci: ["filtro"],
+  filtro: ["fvci"],
+  fibrinolisis: ["fibrinoliticos", "fibrinolitico", "trombolisis"],
+  trombolisis: ["fibrinolisis", "fibrinoliticos", "fibrinolitico"],
+  trombolitico: ["fibrinolitico", "fibrinolisis"],
+  tomografia: ["angio", "tc"],
+  tac: ["angio", "tc"],
+  ecografia: ["doppler", "eco"],
+  embarazada: ["embarazo", "embarazadas"],
+  embarazadas: ["embarazo"],
+  dimero: ["dimero"],
+  ambulatorio: ["ambulatoria", "domiciliario"],
+  domicilio: ["ambulatoria", "domiciliario"],
+  pert: ["respuesta"],
+  revertir: ["reversion", "reversor"],
+  revierte: ["reversion", "reversor"],
+  revierten: ["reversion", "reversor"],
+  antidoto: ["reversor", "reversion"],
+  xi: ["fxi", "xia"],
+  // Equivalencias España ↔ Argentina (el consenso usa la terminología argentina)
+  cribado: ["rastreo", "pesquisa"],
+  screening: ["rastreo", "pesquisa"],
+  gammagrafia: ["centellograma"],
+  inr: ["rin"],
+  ingreso: ["internacion", "hospitalizacion"],
+  hospitalizar: ["internacion", "hospitalizacion"],
+  ttpa: ["aptt"],
+  sintrom: ["acenocumarol", "avk"],
+  obeso: ["obesidad"],
+  obesos: ["obesidad"],
+  obesa: ["obesidad"],
+  durar: ["duracion"],
+  dura: ["duracion"],
+  // Generales
   intravenosa: ["iv"],
   intravenoso: ["iv"],
   endovenosa: ["iv"],
@@ -44,6 +82,7 @@ const QUERY_SYNONYMS: Record<string, string[]> = {
   tension: ["presion"],
   hta: ["hipertension"],
   hipertension: ["hta"],
+  azucar: ["glucemia"],
 };
 
 export function fold(text: string): string {
@@ -57,6 +96,9 @@ export function fold(text: string): string {
 export function stem(word: string): string {
   if (word.length <= 4 || /\d/.test(word)) return word;
   if (word.endsWith("ces")) return word.slice(0, -3) + "z";
+  // Raíz común para verbo y sustantivo: confirmar / confirmación, anticoagular / anticoagulación.
+  if (/aci(on|ones)$/.test(word) && word.length > 7) return word.replace(/aci(on|ones)$/, "");
+  if (/[aei]r$/.test(word) && word.length > 6) return word.slice(0, -2);
   if (word.endsWith("iones")) return word.slice(0, -2);
   let w = word;
   if (/(os|as|es)$/.test(w) && w.length > 5) w = w.slice(0, -2);
@@ -67,7 +109,7 @@ export function stem(word: string): string {
 /** Palabras normalizadas sin lematizar (para búsquedas de frases y resaltado). */
 export function words(text: string): string[] {
   return fold(text)
-    .replace(/i\.\s?v\./g, "iv")
+    .replace(/\bi\.\s?v\./g, "iv")
     .replace(/[^a-z0-9ñ]+/g, " ")
     .split(" ")
     .filter((w) => w.length > 1 || /\d/.test(w));

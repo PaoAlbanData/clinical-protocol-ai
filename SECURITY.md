@@ -6,7 +6,7 @@ Clinical Protocol AI es una **herramienta de consulta documental de demostració
 
 - un sistema autorizado de diagnóstico, prescripción o apoyo a decisiones clínicas individuales;
 - un producto sanitario ni ha sido evaluado como tal;
-- una fuente actualizada: los documentos son de 2015–2020 y se usan como material de simulación.
+- un sustituto del documento original ni de los protocolos de cada centro: consulta un único consenso (Sociedad Argentina de Cardiología, 2025) y sus respuestas son extractos que deben verificarse en el PDF.
 
 Ante cualquier decisión asistencial, consulte los protocolos vigentes de su centro y el criterio de profesionales cualificados.
 
@@ -31,7 +31,7 @@ Ante cualquier decisión asistencial, consulte los protocolos vigentes de su cen
 - Cabeceras definidas en `vercel.json` (y aplicadas también en `npm run preview`):
   - `Content-Security-Policy` restrictiva: scripts sólo del propio dominio (más `wasm-unsafe-eval` para WebGPU), conexiones sólo al propio dominio y a los hosts del modelo (Hugging Face, GitHub raw), sin iframes (`frame-ancestors 'none'`).
   - `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Permissions-Policy` (micrófono sólo para el propio sitio; cámara y geolocalización desactivadas).
-- Sin `dangerouslySetInnerHTML`: el texto de los PDF y del modelo se renderiza como texto.
+- Sin `dangerouslySetInnerHTML`: el texto del PDF y del modelo se renderiza como texto.
 - Dependencias fijadas con `package-lock.json`.
 
 ## Comunicar un problema

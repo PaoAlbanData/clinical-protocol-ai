@@ -21,6 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ---
-This license applies to the source code only. The PDF documents in
-data/protocols/ and the text excerpts in public/data/index.json are
-© Junta de Andalucía, licensed under CC BY-NC-ND 4.0. See SOURCES.md.
+This license applies to the source code only. The PDF document in
+data/protocols/ (unmodified) and the derived index public/data/index.json are
+© Sociedad Argentina de Cardiología, licensed under CC BY-NC-SA 2.5 Argentina
+(https://creativecommons.org/licenses/by-nc-sa/2.5/ar/). See SOURCES.md.

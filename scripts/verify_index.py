@@ -19,6 +19,9 @@ INDEX = ROOT / "public" / "data" / "index.json"
 SRC = ROOT / "data" / "protocols"
 
 
+ANNOTATION = re.compile(r"\[Recomendación clase [^\]]+\]")
+
+
 def norm(text: str) -> str:
     return re.sub(r"[^0-9a-záéíóúüñ]", "", text.lower().replace("­", ""))
 
@@ -40,7 +43,8 @@ def main() -> int:
         page = pages[(c["d"], c["p"])]
         # Cada línea del fragmento (salvo encabezados repetidos) debe estar en la página.
         for line in c["t"].split("\n"):
-            n = norm(line)
+            # La clase y el nivel de evidencia se añaden al indexar desde la tabla.
+            n = norm(ANNOTATION.sub("", line))
             if len(n) >= 8 and n not in page:
                 print(f"[ERROR] fragmento {c['id']} ({c['d']} p{c['p']}): «{line[:80]}» no está en la página")
                 errors += 1

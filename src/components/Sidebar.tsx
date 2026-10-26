@@ -15,7 +15,7 @@ export function Sidebar({ llmStatus, llmProgress, llmEnabled, onActivateLlm, onT
     <div className="space-y-6">
       <section aria-labelledby="docs-title">
         <h2 id="docs-title" className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
-          Documentos incluidos ({DOCUMENTS.length})
+          {DOCUMENTS.length === 1 ? "Documento incluido" : `Documentos incluidos (${DOCUMENTS.length})`}
         </h2>
         <ul className="space-y-2.5">
           {DOCUMENTS.map((d) => (
@@ -24,8 +24,9 @@ export function Sidebar({ llmStatus, llmProgress, llmEnabled, onActivateLlm, onT
                 <div className="min-w-0">
                   <p className="font-semibold text-slate-900">{d.shortTitle}</p>
                   <p className="mt-0.5 text-xs leading-snug text-slate-500">{d.institution}</p>
+                  {d.citation && <p className="mt-0.5 text-xs italic text-slate-500">{d.citation}</p>}
                 </div>
-                <span className="shrink-0 rounded-md bg-amber-50 px-1.5 py-0.5 text-xs font-medium text-amber-800 ring-1 ring-amber-200" title="Documento antiguo: puede no reflejar la evidencia actual">
+                <span className="shrink-0 rounded-md bg-brand-50 px-1.5 py-0.5 text-xs font-medium text-brand-800 ring-1 ring-brand-200" title="Año de publicación">
                   {d.year}
                 </span>
               </div>
@@ -33,8 +34,8 @@ export function Sidebar({ llmStatus, llmProgress, llmEnabled, onActivateLlm, onT
                 <a className="btn-outline" href={d.localUrl} target="_blank" rel="noopener">
                   <IconFile className="h-3.5 w-3.5" /> Abrir PDF
                 </a>
-                <a className="btn-ghost" href={d.url} target="_blank" rel="noopener noreferrer" title="Documento en GuíaSalud">
-                  <IconExternal className="h-3.5 w-3.5" /> GuíaSalud
+                <a className="btn-ghost" href={d.url} target="_blank" rel="noopener noreferrer" title="Documento en la web de la Sociedad Argentina de Cardiología">
+                  <IconExternal className="h-3.5 w-3.5" /> Fuente oficial
                 </a>
               </div>
             </li>
@@ -42,7 +43,7 @@ export function Sidebar({ llmStatus, llmProgress, llmEnabled, onActivateLlm, onT
         </ul>
         <p className="mt-3 flex gap-1.5 text-xs leading-relaxed text-slate-500">
           <IconAlert className="mt-0.5 h-3.5 w-3.5 text-amber-600" />
-          Documentos de 2015–2020 usados sólo como material de simulación. No representan protocolos hospitalarios vigentes.
+          Consenso publicado en 2025. Herramienta de demostración: no sustituye al documento original, a los protocolos de su centro ni al juicio clínico.
         </p>
       </section>
 

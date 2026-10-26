@@ -43,7 +43,7 @@ describe("integridad de las referencias", () => {
         expect(s.chunk.p).toBeLessThanOrEqual(s.doc.pages);
         const plain = s.excerpt.replace(/ …$/, "");
         expect(s.chunk.t.includes(plain.split("\n")[0])).toBe(true);
-        expect(s.doc.institution).toMatch(/Junta de Andalucía/);
+        expect(s.doc.institution).toMatch(/Sociedad Argentina de Cardiología/);
         expect(s.doc.year).toBeGreaterThan(2000);
       }
     }

@@ -5,36 +5,42 @@ import { sanitizeCitations, verifyGenerated } from "../src/lib/llm";
 import type { IndexData } from "../src/lib/types";
 
 const engine = new ProtocolEngine(JSON.parse(readFileSync("public/data/index.json", "utf-8")) as IndexData);
-const tranexamic = engine.ask("¿Cuál es la dosis de ácido tranexámico en el trauma grave?").sources;
-const iam = engine.ask("¿Cuál es el tratamiento del infarto agudo de miocardio?").sources;
+const dabigatran = engine.ask("¿Cómo se revierte el dabigatrán en un sangrado crítico?").sources;
 
-describe("guardas de la IA local (salidas reales de Qwen2.5 1.5B en el navegador)", () => {
+describe("guardas de la IA local", () => {
+  it("hay fuentes para la pregunta de referencia", () => {
+    expect(dabigatran.length).toBeGreaterThan(0);
+    expect(dabigatran.some((s) => s.chunk.t.includes("idarucizumab"))).toBe(true);
+  });
+
   it("normaliza «el fragmento [1]» a «la fuente [1]» y elimina citas inexistentes", () => {
-    expect(sanitizeCitations("Según el fragmento [1], la dosis es 1 g.", tranexamic)).toBe("Según la fuente [1], la dosis es 1 g.");
-    expect(sanitizeCitations("Según el fragmento 2, x [9].", tranexamic)).toBe("Según la fuente [2], x .");
+    expect(sanitizeCitations("Según el fragmento [1], se administran 5 g de idarucizumab.", dabigatran)).toBe(
+      "Según la fuente [1], se administran 5 g de idarucizumab.",
+    );
+    expect(sanitizeCitations("Según el fragmento 2, x [9].", dabigatran)).toBe("Según la fuente [2], x .");
   });
 
   it("acepta una redacción correcta y citada", () => {
     const ok = sanitizeCitations(
-      "Según el fragmento [1], la dosis de ácido tranexámico para el trauma grave es de 1g IV en 10 min, seguido de 1g en 8h.",
-      tranexamic,
+      "Según el fragmento [1], en un sangrado crítico con dabigatrán se recomienda administrar 5 g de idarucizumab.",
+      dabigatran,
     );
-    expect(verifyGenerated(ok, tranexamic)).toBeNull();
+    expect(verifyGenerated(ok, dabigatran)).toBeNull();
   });
 
-  it("rechaza la «respuesta» inventada sobre el infarto agudo de miocardio", () => {
+  it("rechaza afirmaciones sin cita (patrón real observado con Qwen2.5 1.5B)", () => {
     const fabricated =
-      "El tratamiento del infarto agudo de miocardio (IAM) incluye:\n\n" +
-      "1. **Atención hospitalaria (AH)**: Se iniciará con atención hospitalaria inmediata.\n" +
-      "2. **Antiinflamatorios no esteroideos (AINE)**: Se administrarán antiinflamatorios no esteroideos como el ácido acetil salicílico (ASAS) o el ácido salicílico (ASL).";
-    expect(verifyGenerated(sanitizeCitations(fabricated, iam), iam)).toMatch(/sin referencia/);
+      "El tratamiento del sangrado incluye:\n\n" +
+      "- **Atención hospitalaria**: Se iniciará con atención hospitalaria inmediata.\n" +
+      "- **Antiinflamatorios no esteroideos (AINE)**: Se administrarán antiinflamatorios como el ácido acetil salicílico.";
+    expect(verifyGenerated(sanitizeCitations(fabricated, dabigatran), dabigatran)).toMatch(/sin referencia/);
   });
 
   it("rechaza cifras ausentes de las fuentes aunque estén citadas", () => {
-    expect(verifyGenerated("Se administran 3 g de ácido tranexámico en 20 minutos [1].", tranexamic)).toMatch(/cifras/);
+    expect(verifyGenerated("Se administran 17 g de idarucizumab en 45 minutos [1].", dabigatran)).toMatch(/cifras/);
   });
 
   it("acepta el mensaje de información insuficiente", () => {
-    expect(verifyGenerated(INSUFFICIENT, tranexamic)).toBeNull();
+    expect(verifyGenerated(INSUFFICIENT, dabigatran)).toBeNull();
   });
 });

@@ -18,7 +18,7 @@
 Comprobaciones en el código:
 - No hay variables de entorno ni claves (`grep -ri "api_key\|apikey\|secret" src scripts` → sin resultados).
 - No hay carpeta `api/` ni funciones serverless: Vercel sólo sirve archivos estáticos.
-- En la prueba en navegador, la aplicación realizó **0 peticiones a dominios externos** durante las consultas. Las únicas conexiones externas posibles son: la descarga del modelo (sólo si el visitante pulsa «Activar IA local») y los enlaces que el visitante abre (GuíaSalud).
+- En la prueba en navegador, la aplicación realizó **0 peticiones a dominios externos** durante las consultas. Las únicas conexiones externas posibles son: la descarga del modelo (sólo si el visitante pulsa «Activar IA local») y los enlaces que el visitante abre (web de la SAC).
 - Las preguntas de los visitantes **no consumen tokens de Claude** ni de ningún otro proveedor: se responden con el índice estático.
 
 ## Consumo estimado por visita (transferencia desde Vercel)
@@ -26,12 +26,12 @@ Comprobaciones en el código:
 | Recurso | Tamaño (gzip) | Cuándo se descarga |
 |---|---|---|
 | HTML + JS + CSS iniciales | ≈70 KB | Al abrir la página |
-| Índice documental `index.json` | ≈174 KB | Al enfocar el cuadro de pregunta (una vez; caché HTTP 1 h) |
+| Índice documental `index.json` | ≈108 KB | Al enfocar el cuadro de pregunta (una vez; caché HTTP 1 h) |
 | Código de WebLLM | ≈2 MB | Sólo al activar la IA local |
-| Cada PDF original | 0,7–1,3 MB | Sólo al pulsar «Abrir PDF» (caché 24 h) |
+| PDF original del consenso | 5,3 MB | Sólo al pulsar «Abrir PDF» (caché 24 h) |
 | Modelo de IA (≈1 GB) | — | **Desde Hugging Face, no desde Vercel**; sólo bajo petición |
 
-Una visita típica (abrir, preguntar, abrir un PDF) transfiere ≈1,5 MB. Como orientación, con una cuota mensual de transferencia de 100 GB harían falta del orden de **60.000 visitas al mes** para agotarla. Consulte los límites vigentes del plan Hobby en <https://vercel.com/docs/limits> antes de publicar; si se alcanzan, Vercel pausa el proyecto hasta el siguiente ciclo, sin cargos.
+Una visita típica sin abrir el PDF transfiere ≈0,2 MB; si además abre el PDF, ≈5,5 MB. Como orientación, con una cuota mensual de transferencia de 100 GB harían falta del orden de **18.000 visitas al mes que abran el PDF** (o cientos de miles que sólo pregunten) para agotarla. Consulte los límites vigentes del plan Hobby en <https://vercel.com/docs/limits> antes de publicar; si se alcanzan, Vercel pausa el proyecto hasta el siguiente ciclo, sin cargos.
 
 ## Riesgos y controles
 

@@ -12,16 +12,18 @@ import type { Answer, Chunk, DocMeta, IndexData, Source } from "./types";
 import { queryTerms, tokenize, words } from "./text";
 
 const GREETINGS = new Set(["hola", "buenas", "buenos", "dias", "tardes", "noches", "gracias", "ayuda", "hey", "saludos"]);
+const LEGEND_ENTRY = /\b[A-Z][A-Za-z0-9-]{1,9}\s?[:=]\s?[a-záéíóúñ]/g;
 const INDICATOR_TEXT = /DENOMINACIÓN|FÓRMULA|POBLACIÓN DEL INDICADOR/;
-const INDICATOR_QUERY = /indicador/;
-const GLOSSARY_QUERY = /(significa|significado|sigla|siglas|acronimo|acronimos|abreviatura)/;
+const INDICATOR_QUERY = /\bindicador/;
+const GLOSSARY_QUERY = /\b(significa|significado|sigla|siglas|acronimo|acronimos|abreviatura)\b/;
 
 export const INSUFFICIENT =
   "No encuentro información suficiente en los protocolos incluidos para responder con seguridad.";
 
 export const HELP =
-  "Formule una pregunta general sobre los protocolos incluidos (trauma grave, EPOC, ictus o diabetes mellitus), " +
-  "por ejemplo: «¿Cuál es el tiempo máximo para la fibrinólisis en el ictus?».";
+  "Formule una pregunta general sobre el Consenso de Enfermedad Tromboembólica Venosa (TEP y TVP): diagnóstico, " +
+  "estratificación del riesgo, anticoagulación, fibrinólisis, filtros de vena cava, poblaciones especiales… " +
+  "Por ejemplo: «¿Qué pacientes con TEP pueden tratarse de forma ambulatoria?».";
 
 /** Parámetros ajustados con el conjunto de evaluación de tests/eval.test.ts. */
 export const CONFIG = {
@@ -159,6 +161,8 @@ export class ProtocolEngine {
       for (const t of terms) {
         if (lineTerms.has(t) || [...lineTerms].some((lt) => t.length >= 5 && lt.startsWith(t))) s += this.idf(t);
       }
+      // Las leyendas de abreviaturas («HBPM: heparina…, HNF: …») no sirven como extracto.
+      if ((line.match(LEGEND_ENTRY) ?? []).length >= 2 || (line.length < 120 && /^[A-Z][\w\-/]{1,12}\s?[:=]/.test(line))) s *= 0.2;
       return { i, s, len: line.length };
     });
     const best = [...scored].sort((a, b) => b.s - a.s || a.i - b.i)[0];
@@ -200,7 +204,7 @@ export class ProtocolEngine {
         const p = this.byId.get(r.id as number)!;
         const cov = this.coverage(terms, p);
         let w = 1 + CONFIG.proximityBonus * this.proximity(terms, p);
-        if (p.chunk.g && !wantsGlossary) w *= CONFIG.glossaryWeight;
+        if (p.chunk.g) w *= wantsGlossary ? 1 / CONFIG.glossaryWeight : CONFIG.glossaryWeight;
         if (p.indicator && !wantsIndicators) w *= CONFIG.indicatorWeight;
         return { p, score: r.score, cov, rank: r.score * cov * cov * w };
       })
@@ -263,7 +267,7 @@ function clip(text: string, max: number): string {
   return (stop > max * 0.6 ? cut.slice(0, stop + 1) : cut.replace(/\s+\S*$/, "")) + " …";
 }
 
-/** Cita legible: «PAI Ictus (Junta de Andalucía, 2015), pág. 30 del PDF». */
+/** Cita legible: «Consenso ETV (SAC 2025) — Sociedad Argentina de Cardiología…, 2025. Pág. 25 del PDF». */
 export function citation(s: Source): string {
   const printed = s.chunk.l && s.chunk.l !== s.chunk.p ? ` (pág. impresa ${s.chunk.l})` : "";
   return `${s.doc.shortTitle} — ${s.doc.institution}, ${s.doc.year}. Pág. ${s.chunk.p} del PDF${printed}`;

@@ -7,6 +7,7 @@ export const DOCUMENTS = manifest.map((d) => ({
   shortTitle: d.shortTitle,
   institution: d.institution,
   year: d.year,
+  citation: d.citation,
   license: d.license,
   url: d.url,
   localUrl: `${import.meta.env.BASE_URL}protocols/${d.file}`,
