@@ -3,6 +3,14 @@ import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
+import { createHash } from "node:crypto";
+
+// Huella del índice: cambia la URL de descarga en cada versión y evita que un
+// navegador con caché combine la interfaz nueva con un índice antiguo.
+const INDEX_HASH = createHash("sha256")
+  .update(readFileSync(resolve(__dirname, "public/data/index.json")))
+  .digest("hex")
+  .slice(0, 12);
 
 const PDF_DIR = resolve(__dirname, "data/protocols");
 
@@ -42,5 +50,6 @@ export default defineConfig({
   plugins: [react(), originalPdfs()],
   build: { chunkSizeWarningLimit: 7000 },
   preview: { headers: vercelHeaders },
+  define: { __INDEX_HASH__: JSON.stringify(INDEX_HASH) },
   test: { environment: "node" },
 });

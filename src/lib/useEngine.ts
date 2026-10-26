@@ -12,7 +12,7 @@ export function useEngine() {
   const load = useCallback(() => {
     if (!promise.current) {
       setState("loading");
-      promise.current = fetch(`${import.meta.env.BASE_URL}data/index.json`)
+      promise.current = fetch(`${import.meta.env.BASE_URL}data/index.json?v=${__INDEX_HASH__}`)
         .then((r) => {
           if (!r.ok) throw new Error(`HTTP ${r.status}`);
           return r.json() as Promise<IndexData>;
